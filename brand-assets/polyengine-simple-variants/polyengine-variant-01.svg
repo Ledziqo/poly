@@ -1,0 +1,13 @@
+<svg width="1800" height="520" viewBox="0 0 1800 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine simple logo variant 01</title>
+  <defs>
+    <linearGradient id="g" x1="96" y1="80" x2="430" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22C55E"/><stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <path d="M110 410V110H288C378 110 430 160 430 238C430 316 378 366 288 366H190V410H110Z" fill="url(#g)"/>
+  <path d="M190 294H282C324 294 348 273 348 238C348 203 324 182 282 182H190V294Z" fill="#0A0A0A"/>
+  <path d="M212 238H350" stroke="#22C55E" stroke-width="26" stroke-linecap="round"/>
+  <text x="540" y="318" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="184" font-weight="800">Poly</text>
+  <text x="960" y="318" fill="#22C55E" font-family="Inter, Arial, sans-serif" font-size="184" font-weight="800">Engine</text>
+</svg>
