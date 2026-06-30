@@ -9,24 +9,28 @@
 </head>
 <body class="landing-body">
 <header class="landing-nav">
-    <a class="landing-brand" href="{{ route('landing') }}">
-        <img src="{{ asset('brand/polyengine-logo.png') }}" alt="PolyEngine">
-    </a>
-    <nav>
-        <a href="#signals">Signals</a>
-        <a href="#paper">Paper Trading</a>
-        <a href="#pricing">Access</a>
-        <a href="{{ route('login') }}">Login</a>
-        <a class="nav-cta" href="{{ route('signup') }}">Get Access</a>
-    </nav>
+    <div class="landing-nav-inner">
+        <a class="landing-brand" href="{{ route('landing') }}">
+            <img src="{{ asset('brand/polyengine-logo.png') }}" alt="PolyEngine">
+        </a>
+        <nav>
+            <a href="#signals">Signals</a>
+            <a href="#paper">Automation</a>
+            <a href="#pricing">Access</a>
+        </nav>
+        <div class="nav-actions">
+            <a href="{{ route('login') }}">Login</a>
+            <a class="nav-cta" href="{{ route('signup') }}">Get Access</a>
+        </div>
+    </div>
 </header>
 
 <main>
     <section class="hero">
         <div class="hero-content">
             <p class="eyebrow">Private AI paper trading lab</p>
-            <h1>Train your Polymarket edge before money is on the line.</h1>
-            <p class="hero-copy">PolyEngine scans live markets, scores asymmetric setups, and lets an automatic paper bot execute against simulated order-book depth. Real data, fake capital, cleaner decisions.</p>
+            <h1>See the trades before you risk the money.</h1>
+            <p class="hero-copy">PolyEngine turns live Polymarket data into ranked signals, simulated entries, risk controls, and paper PnL so you can test the bot before copying anything with real capital.</p>
             <div class="hero-actions">
                 <a class="primary-btn" href="{{ route('signup') }}">Request Access</a>
                 <a class="secondary-btn" href="{{ route('login') }}">Member Login</a>
@@ -37,46 +41,50 @@
                 <span>Decision logs</span>
             </div>
         </div>
-        <aside class="product-preview" aria-label="PolyEngine dashboard preview">
-            <div class="preview-top">
-                <div>
-                    <span>PolyEngine Terminal</span>
-                    <strong>Opportunity Console</strong>
+        <aside class="hero-visual" aria-label="PolyEngine dashboard preview">
+            <div class="visual-glow"></div>
+            <div class="visual-window">
+                <div class="window-bar">
+                    <span></span><span></span><span></span>
+                    <strong>Live Paper Engine</strong>
                 </div>
-                <em>Live</em>
-            </div>
-            <div class="preview-hero-row">
-                <div>
-                    <small>Bot Equity</small>
-                    <strong>$12,842.19</strong>
-                    <span>+8.6% paper ROI</span>
+                <div class="window-body">
+                    <div class="preview-top">
+                        <div>
+                            <span>Today</span>
+                            <strong>7 signals ranked</strong>
+                        </div>
+                        <em>Auto</em>
+                    </div>
+                    <div class="preview-hero-row">
+                        <div>
+                            <small>Paper Equity</small>
+                            <strong>$12,842</strong>
+                            <span>+8.6% ROI</span>
+                        </div>
+                        <div>
+                            <small>Best Edge</small>
+                            <strong>+7.2%</strong>
+                            <span>Strong Entry</span>
+                        </div>
+                    </div>
+                    <div class="preview-chart">
+                        <span style="height:34%"></span>
+                        <span style="height:48%"></span>
+                        <span style="height:42%"></span>
+                        <span style="height:66%"></span>
+                        <span style="height:58%"></span>
+                        <span style="height:78%"></span>
+                        <span style="height:72%"></span>
+                        <span style="height:88%"></span>
+                    </div>
+                    <div class="preview-table">
+                        <div><span>Market</span><span>Edge</span><span>Action</span></div>
+                        <div><b>BTC weekly close</b><strong>+7.2%</strong><em>Enter</em></div>
+                        <div><b>Fed decision</b><strong>+4.1%</strong><em>Watch</em></div>
+                        <div><b>Election spread</b><strong>-1.8%</strong><em>Skip</em></div>
+                    </div>
                 </div>
-                <div>
-                    <small>Signal Grade</small>
-                    <strong>87</strong>
-                    <span>Strong Entry</span>
-                </div>
-            </div>
-            <div class="preview-chart">
-                <span style="height:34%"></span>
-                <span style="height:48%"></span>
-                <span style="height:42%"></span>
-                <span style="height:66%"></span>
-                <span style="height:58%"></span>
-                <span style="height:78%"></span>
-                <span style="height:72%"></span>
-                <span style="height:88%"></span>
-            </div>
-            <div class="preview-table">
-                <div><span>Market</span><span>Edge</span><span>Action</span></div>
-                <div><b>BTC weekly close</b><strong>+7.2%</strong><em>Enter</em></div>
-                <div><b>Fed decision</b><strong>+4.1%</strong><em>Watch</em></div>
-                <div><b>Election spread</b><strong>-1.8%</strong><em>Skip</em></div>
-            </div>
-            <div class="preview-footer">
-                <span>Depth checked</span>
-                <span>Slippage modeled</span>
-                <span>Risk capped</span>
             </div>
         </aside>
     </section>

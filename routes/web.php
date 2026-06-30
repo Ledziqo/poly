@@ -10,6 +10,7 @@ Route::post('/setup/run', [SetupController::class, 'run'])->name('setup.run');
 
 Route::view('/', 'landing')->name('landing');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login-health', [AuthController::class, 'health'])->name('login.health');
 Route::post('/login', [AuthController::class, 'storeLogin'])->name('login.store');
 Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::post('/signup', [AuthController::class, 'storeSignup'])->name('signup.store');
