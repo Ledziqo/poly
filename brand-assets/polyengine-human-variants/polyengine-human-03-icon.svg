@@ -1,0 +1,8 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine human logo 03 icon</title>
+  <path d="M244 244H780V780H244V244Z" fill="#111827"/>
+  <path d="M346 700V324H536C620 324 676 374 676 448C676 522 620 572 536 572H444V700H346Z" fill="#F8FAFC"/>
+  <path d="M444 494H526C560 494 582 476 582 448C582 420 560 402 526 402H444V494Z" fill="#111827"/>
+  <path d="M306 306H718" stroke="#22C55E" stroke-width="30" stroke-linecap="round"/>
+  <path d="M306 718H718" stroke="#3B82F6" stroke-width="30" stroke-linecap="round"/>
+</svg>

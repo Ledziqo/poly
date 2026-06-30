@@ -1,0 +1,8 @@
+<svg width="1900" height="560" viewBox="0 0 1900 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine human logo 04 lockup</title>
+  <path d="M116 424V136H266C334 136 380 176 380 236C380 296 334 336 266 336H190V424H116Z" fill="#F8FAFC"/>
+  <path d="M190 270H258C286 270 304 258 304 236C304 214 286 202 258 202H190V270Z" fill="#0A0A0A"/>
+  <path d="M116 424H306" stroke="#22C55E" stroke-width="26" stroke-linecap="round"/>
+  <text x="520" y="330" fill="#F8FAFC" font-family="'Trebuchet MS', Arial, sans-serif" font-size="190" font-weight="700">PolyEngine</text>
+  <circle cx="1810" cy="172" r="20" fill="#22C55E"/>
+</svg>
