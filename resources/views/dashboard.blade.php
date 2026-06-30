@@ -1,0 +1,81 @@
+@php
+    $equity = (float) $portfolio->cash_balance + (float) $portfolio->total_exposure;
+    $totalPnl = (float) $portfolio->realized_pnl + (float) $portfolio->unrealized_pnl;
+@endphp
+
+<x-layouts.app heading="Command Dashboard" eyebrow="What should the bot trade right now?">
+    <section class="grid stats-grid">
+        <x-stat label="Paper Equity" :value="'$'.number_format($equity, 2)" />
+        <x-stat label="Cash" :value="'$'.number_format((float) $portfolio->cash_balance, 2)" />
+        <x-stat label="Total PnL" :value="'$'.number_format($totalPnl, 2)" :tone="$totalPnl >= 0 ? 'positive' : 'negative'" />
+        <x-stat label="Bot Status" :value="$portfolio->settings->enabled ? 'Running' : 'Paused'" :tone="$portfolio->settings->enabled ? 'positive' : 'warning'" />
+    </section>
+
+    <section class="panel">
+        <div class="panel-head">
+            <h2>Best AI Opportunities</h2>
+            <a href="{{ route('opportunities.index') }}">View all</a>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Market</th><th>Outcome</th><th>Price</th><th>Fair</th><th>Edge</th><th>Grade</th></tr></thead>
+                <tbody>
+                @forelse ($opportunities as $signal)
+                    <tr>
+                        <td><a href="{{ route('markets.show', $signal->outcome->market) }}">{{ Str::limit($signal->outcome->market->question, 72) }}</a></td>
+                        <td>{{ $signal->outcome->name }}</td>
+                        <td>{{ number_format((float) $signal->market_probability * 100, 1) }}%</td>
+                        <td>{{ number_format((float) $signal->fair_probability * 100, 1) }}%</td>
+                        <td class="positive">+{{ number_format((float) $signal->edge * 100, 1) }}%</td>
+                        <td><x-grade :grade="$signal->grade" /></td>
+                    </tr>
+                @empty
+                    <tr><td colspan="6" class="empty">Run market/order book sync and signal scoring to populate opportunities.</td></tr>
+                @endforelse
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="two-col">
+        <div class="panel">
+            <div class="panel-head"><h2>Open Paper Positions</h2><a href="{{ route('portfolio.index') }}">Portfolio</a></div>
+            @forelse ($positions as $position)
+                <article class="row-card">
+                    <div>
+                        <strong>{{ $position->outcome->name }}</strong>
+                        <span>{{ Str::limit($position->outcome->market->question, 82) }}</span>
+                    </div>
+                    <b @class([(float) $position->unrealized_pnl >= 0 ? 'positive' : 'negative'])>${{ number_format((float) $position->unrealized_pnl, 2) }}</b>
+                </article>
+            @empty
+                <p class="empty">No open positions yet. The bot will enter only when signals pass risk checks.</p>
+            @endforelse
+        </div>
+        <div class="panel">
+            <div class="panel-head"><h2>Recent Bot Decisions</h2></div>
+            @forelse ($decisions as $decision)
+                <article class="decision">
+                    <span>{{ strtoupper($decision->status) }} / {{ $decision->action }}</span>
+                    <p>{{ $decision->reason }}</p>
+                    <small>{{ $decision->decided_at?->diffForHumans() }}</small>
+                </article>
+            @empty
+                <p class="empty">No bot logs yet.</p>
+            @endforelse
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head"><h2>Highest Volume Markets</h2><a href="{{ route('markets.index') }}">Markets</a></div>
+        <div class="cards">
+            @foreach ($markets as $market)
+                <a class="market-card" href="{{ route('markets.show', $market) }}">
+                    <span>{{ $market->category_name ?? 'Market' }}</span>
+                    <strong>{{ Str::limit($market->question, 96) }}</strong>
+                    <small>Vol ${{ number_format((float) $market->volume, 0) }} · Liq ${{ number_format((float) $market->liquidity, 0) }}</small>
+                </a>
+            @endforeach
+        </div>
+    </section>
+</x-layouts.app>
