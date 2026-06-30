@@ -23,42 +23,69 @@
 
 <main>
     <section class="hero">
-        <div class="hero-media" aria-hidden="true">
-            <img src="{{ asset('brand/polyengine-main.png') }}" alt="">
-        </div>
         <div class="hero-content">
-            <p class="eyebrow">AI powered. Markets driven.</p>
-            <h1>Automatic paper trading for Polymarket signals.</h1>
-            <p class="hero-copy">PolyEngine watches real Polymarket markets, evaluates order-book depth, scores opportunities, and runs fake-money trades so you can test signal quality before risking real capital.</p>
+            <p class="eyebrow">AI paper trading terminal for Polymarket</p>
+            <h1>Test market edges before you trade them.</h1>
+            <p class="hero-copy">PolyEngine mirrors live Polymarket data, scores opportunities, and runs automatic fake-money execution with order-book-aware fills, risk limits, and decision logs.</p>
             <div class="hero-actions">
-                <a class="primary-btn" href="{{ route('signup') }}">Start with Paper Mode</a>
+                <a class="primary-btn" href="{{ route('signup') }}">Request Access</a>
                 <a class="secondary-btn" href="{{ route('login') }}">Member Login</a>
             </div>
             <div class="hero-stats">
-                <span><strong>Real</strong> market data</span>
-                <span><strong>Fake</strong> money execution</span>
-                <span><strong>Full</strong> decision logs</span>
+                <span><strong>Live</strong> markets</span>
+                <span><strong>Simulated</strong> fills</span>
+                <span><strong>Explainable</strong> bot actions</span>
             </div>
         </div>
+        <aside class="hero-terminal" aria-label="PolyEngine preview">
+            <div class="terminal-top">
+                <img src="{{ asset('brand/polyengine-icon.png') }}" alt="">
+                <div>
+                    <strong>PolyEngine</strong>
+                    <span>Paper bot online</span>
+                </div>
+            </div>
+            <div class="terminal-score">
+                <span>Opportunity Score</span>
+                <strong>87</strong>
+                <em>Strong Entry</em>
+            </div>
+            <div class="terminal-market">
+                <small>Market</small>
+                <b>Will BTC close above target this week?</b>
+            </div>
+            <div class="terminal-grid">
+                <div><span>Edge</span><strong>+7.2%</strong></div>
+                <div><span>Spread</span><strong>2.8%</strong></div>
+                <div><span>Size</span><strong>$240</strong></div>
+                <div><span>Risk</span><strong>Balanced</strong></div>
+            </div>
+            <div class="terminal-log">
+                <p><span></span>Entered YES after liquidity and spread checks.</p>
+                <p><span></span>Partial fill simulated across top 3 asks.</p>
+                <p><span></span>Exit rules armed: take profit, stop loss, edge decay.</p>
+            </div>
+        </aside>
     </section>
 
     <section class="landing-band" id="signals">
         <div class="section-head">
             <p class="eyebrow">Signal Engine</p>
-            <h2>Find markets worth watching before they become obvious.</h2>
+            <h2>Rank real markets by edge, confidence, depth, and timing.</h2>
+            <p>Built for watching the full trading loop instead of guessing from a single displayed price.</p>
         </div>
         <div class="feature-grid">
-            <article><span>01</span><h3>AI Opportunity Ranking</h3><p>Markets are ranked by price, estimated fair probability, edge, confidence, liquidity, spread, expiry timing, and movement risk.</p></article>
-            <article><span>02</span><h3>Order Book Awareness</h3><p>Paper entries are simulated against bid/ask depth instead of pretending the displayed price is always executable.</p></article>
-            <article><span>03</span><h3>Explainable Decisions</h3><p>Every entry, skip, exit, and risk block is logged so you can understand what the bot saw and why it acted.</p></article>
+            <article><span>01</span><h3>Market Scoring</h3><p>Prices, liquidity, volume, expiry, movement, and spread feed a ranked opportunity board.</p></article>
+            <article><span>02</span><h3>Realistic Paper Fills</h3><p>Entries use order book depth, slippage, partial fills, and liquidity checks for a closer simulation.</p></article>
+            <article><span>03</span><h3>Decision Memory</h3><p>Every skip, entry, exit, resize, and pause gets a plain-English explanation trail.</p></article>
         </div>
     </section>
 
     <section class="split-band" id="paper">
         <div>
             <p class="eyebrow">Paper Execution</p>
-            <h2>Real Polymarket feel. No real-money execution.</h2>
-            <p>PolyEngine is built for disciplined testing: fake balance, simulated fills, partial fill handling, slippage checks, take profit, stop loss, exposure limits, and portfolio tracking.</p>
+            <h2>Automatic bot behavior with fake money only.</h2>
+            <p>The MVP is designed to learn before going live: paper balance, simulated entries, exits, PnL, win rate, exposure, and a full trade history that you can review before copying anything manually.</p>
         </div>
         <div class="terminal-mock">
             <div><span>Strong Entry</span><b>YES @ 38.4%</b><em>Edge +7.2%</em></div>
@@ -70,7 +97,7 @@
     <section class="landing-band">
         <div class="section-head">
             <p class="eyebrow">Workflow</p>
-            <h2>From market scan to paper PnL in one loop.</h2>
+            <h2>One clean loop from live data to paper PnL.</h2>
         </div>
         <div class="steps">
             <div><strong>Sync</strong><p>Pull live Polymarket markets, outcomes, liquidity, volume, and order books.</p></div>
@@ -83,8 +110,8 @@
     <section class="pricing-band" id="pricing">
         <div>
             <p class="eyebrow">Private Access</p>
-            <h2>PolyEngine is subscription-gated while the paper bot is being refined.</h2>
-            <p>Create an account, then message {{ config('polyengine.telegram') }} on Telegram to activate your subscription.</p>
+            <h2>Subscription-gated while the engine is being refined.</h2>
+            <p>Create an account, then message @Aesliex on Telegram to activate your PolyEngine subscription.</p>
         </div>
         <a class="primary-btn" href="{{ route('signup') }}">Create Account</a>
     </section>

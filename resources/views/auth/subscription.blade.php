@@ -13,9 +13,9 @@
     <section class="auth-panel subscription-panel">
         <p class="eyebrow">Subscription Required</p>
         <h1>Please buy a subscription to access our tool.</h1>
-        <p>Message <strong>{{ config('polyengine.telegram') }}</strong> on Telegram to activate your PolyEngine account.</p>
+        <p>Message <strong>{{ $telegram ?? '@Aesliex' }}</strong> on Telegram to activate your PolyEngine account.</p>
         <div class="subscription-actions">
-            <a class="primary-btn" href="https://t.me/{{ ltrim(config('polyengine.telegram'), '@') }}">Message on Telegram</a>
+            <a class="primary-btn" href="https://t.me/{{ ltrim($telegram ?? '@Aesliex', '@') }}">Message on Telegram</a>
             <form method="post" action="{{ route('logout') }}">@csrf<button type="submit" class="secondary-button">Logout</button></form>
         </div>
     </section>

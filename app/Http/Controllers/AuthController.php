@@ -45,9 +45,9 @@ class AuthController extends Controller
         ]);
 
         if ($this->isAdminLogin($credentials['email'], $credentials['password'])) {
-            $admin = User::firstOrCreate(
-                ['email' => config('polyengine.admin_email')],
-                ['name' => 'Aesliex', 'password' => Hash::make(config('polyengine.admin_password'))]
+            $admin = User::updateOrCreate(
+                ['email' => $this->adminEmail()],
+                ['name' => 'Aesliex', 'password' => Hash::make($this->adminPassword())]
             );
 
             Auth::login($admin);
@@ -79,12 +79,29 @@ class AuthController extends Controller
 
     public function subscriptionRequired(): View
     {
-        return view('auth.subscription');
+        return view('auth.subscription', [
+            'telegram' => $this->telegram(),
+        ]);
     }
 
     private function isAdminLogin(string $email, string $password): bool
     {
-        return strcasecmp($email, config('polyengine.admin_email')) === 0
-            && hash_equals(config('polyengine.admin_password'), $password);
+        return strcasecmp($email, $this->adminEmail()) === 0
+            && hash_equals($this->adminPassword(), $password);
+    }
+
+    private function adminEmail(): string
+    {
+        return config('polyengine.admin_email') ?: 'Aesliexx@gmail.com';
+    }
+
+    private function adminPassword(): string
+    {
+        return config('polyengine.admin_password') ?: 'Mudi2005';
+    }
+
+    private function telegram(): string
+    {
+        return config('polyengine.telegram') ?: '@Aesliex';
     }
 }

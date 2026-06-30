@@ -29,7 +29,7 @@
 
     <section class="panel">
         <div class="panel-head"><h2>Recommended First Run</h2></div>
-        <p class="empty">Run: migrations, sync markets, sync order books, score AI opportunities, run paper bot once, refresh portfolio.</p>
+        <p class="empty">Run: clear Laravel cache, migrations, create/update admin login, sync markets, sync order books, score AI opportunities, run paper bot once, refresh portfolio.</p>
         <p class="empty">Then turn on Hostinger cron for <code>php artisan schedule:run</code>.</p>
     </section>
 </x-layouts.app>

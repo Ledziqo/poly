@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class SetupController extends Controller
@@ -17,6 +19,7 @@ class SetupController extends Controller
         'run-bot' => ['label' => 'Run paper bot once', 'command' => 'poly:run-bot', 'params' => []],
         'refresh-portfolio' => ['label' => 'Refresh portfolio PnL', 'command' => 'poly:refresh-portfolio', 'params' => []],
         'optimize-clear' => ['label' => 'Clear Laravel cache', 'command' => 'optimize:clear', 'params' => []],
+        'create-admin' => ['label' => 'Create/update admin login', 'command' => null, 'params' => []],
         'config-cache' => ['label' => 'Cache production config', 'command' => 'config:cache', 'params' => []],
     ];
 
@@ -45,6 +48,22 @@ class SetupController extends Controller
         abort_unless(isset($this->commands[$data['action']]), 404);
 
         $definition = $this->commands[$data['action']];
+
+        if ($data['action'] === 'create-admin') {
+            $email = config('polyengine.admin_email') ?: 'Aesliexx@gmail.com';
+            $password = config('polyengine.admin_password') ?: 'Mudi2005';
+
+            User::updateOrCreate(
+                ['email' => $email],
+                ['name' => 'Aesliex', 'password' => Hash::make($password)]
+            );
+
+            return redirect()
+                ->route('setup.index', ['token' => $request->query('token') ?: $request->input('token')])
+                ->with('setup_status', 'Admin login created or updated.')
+                ->with('setup_output', "Admin email: {$email}\nTool access: enabled after login.");
+        }
+
         $status = Artisan::call($definition['command'], $definition['params']);
 
         return redirect()
