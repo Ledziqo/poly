@@ -43,10 +43,10 @@ class PaperTradingBot
 
         AiSignal::query()
             ->with(['outcome.market'])
-            ->whereIn('grade', ['Strong Entry', 'Good Entry'])
+            ->whereIn('grade', ['Strong Entry', 'Good Entry', 'Watch'])
             ->where('scored_at', '>=', now()->subMinutes(30))
             ->orderByDesc('edge')
-            ->limit(20)
+            ->limit(40)
             ->get()
             ->each(function (AiSignal $signal) use ($portfolio, $settings, &$entered, &$openCount) {
                 $outcome = $signal->outcome;

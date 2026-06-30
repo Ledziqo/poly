@@ -136,13 +136,13 @@ return new class extends Migration
             $table->decimal('max_amount_per_trade', 18, 2)->default(100);
             $table->string('risk_level')->default('balanced');
             $table->decimal('max_daily_loss', 18, 2)->default(250);
-            $table->unsignedInteger('max_open_positions')->default(8);
-            $table->decimal('max_total_exposure', 18, 2)->default(1500);
-            $table->decimal('minimum_liquidity', 18, 2)->default(1000);
-            $table->decimal('max_spread', 8, 4)->default(0.0800);
+            $table->unsignedInteger('max_open_positions')->default(20);
+            $table->decimal('max_total_exposure', 18, 2)->default(3000);
+            $table->decimal('minimum_liquidity', 18, 2)->default(500);
+            $table->decimal('max_spread', 8, 4)->default(0.1000);
             $table->decimal('max_slippage', 8, 4)->default(0.0300);
-            $table->decimal('min_edge', 8, 4)->default(0.0500);
-            $table->unsignedTinyInteger('min_confidence')->default(65);
+            $table->decimal('min_edge', 8, 4)->default(0.0300);
+            $table->unsignedTinyInteger('min_confidence')->default(60);
             $table->timestamps();
         });
 

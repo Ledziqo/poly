@@ -11,5 +11,5 @@ Artisan::command('inspire', function () {
 Schedule::command('poly:sync-markets --limit=100')->everyFifteenMinutes()->withoutOverlapping();
 Schedule::command('poly:sync-orderbooks --limit=150')->everyTwoMinutes()->withoutOverlapping();
 Schedule::command('poly:score-signals --limit=300')->everyFiveMinutes()->withoutOverlapping();
-Schedule::command('poly:run-bot')->everyFiveMinutes()->withoutOverlapping();
-Schedule::command('poly:refresh-portfolio')->everyTwoMinutes()->withoutOverlapping();
+Schedule::command('poly:run-bot')->everyMinute()->withoutOverlapping();
+Schedule::command('poly:refresh-portfolio')->everyMinute()->withoutOverlapping();
