@@ -1,6 +1,7 @@
 @php
     $equity = (float) $portfolio->cash_balance + (float) $portfolio->total_exposure;
     $totalPnl = (float) $portfolio->realized_pnl + (float) $portfolio->unrealized_pnl;
+    $botEnabled = (bool) optional($portfolio->settings)->enabled;
 @endphp
 
 <x-layouts.app heading="Command Dashboard" eyebrow="What should the bot trade right now?">
@@ -8,7 +9,7 @@
         <x-stat label="Paper Equity" :value="'$'.number_format($equity, 2)" />
         <x-stat label="Cash" :value="'$'.number_format((float) $portfolio->cash_balance, 2)" />
         <x-stat label="Total PnL" :value="'$'.number_format($totalPnl, 2)" :tone="$totalPnl >= 0 ? 'positive' : 'negative'" />
-        <x-stat label="Bot Status" :value="$portfolio->settings->enabled ? 'Running' : 'Paused'" :tone="$portfolio->settings->enabled ? 'positive' : 'warning'" />
+        <x-stat label="Bot Status" :value="$botEnabled ? 'Running' : 'Paused'" :tone="$botEnabled ? 'positive' : 'warning'" />
     </section>
 
     <section class="panel">
@@ -22,8 +23,14 @@
                 <tbody>
                 @forelse ($opportunities as $signal)
                     <tr>
-                        <td><a href="{{ route('markets.show', $signal->outcome->market) }}">{{ Str::limit($signal->outcome->market->question, 72) }}</a></td>
-                        <td>{{ $signal->outcome->name }}</td>
+                        <td>
+                            @if ($signal->outcome?->market)
+                                <a href="{{ route('markets.show', $signal->outcome->market) }}">{{ Str::limit($signal->outcome->market->question, 72) }}</a>
+                            @else
+                                Unknown market
+                            @endif
+                        </td>
+                        <td>{{ $signal->outcome?->name ?? 'Unknown outcome' }}</td>
                         <td>{{ number_format((float) $signal->market_probability * 100, 1) }}%</td>
                         <td>{{ number_format((float) $signal->fair_probability * 100, 1) }}%</td>
                         <td class="positive">+{{ number_format((float) $signal->edge * 100, 1) }}%</td>
@@ -43,8 +50,8 @@
             @forelse ($positions as $position)
                 <article class="row-card">
                     <div>
-                        <strong>{{ $position->outcome->name }}</strong>
-                        <span>{{ Str::limit($position->outcome->market->question, 82) }}</span>
+                        <strong>{{ $position->outcome?->name ?? 'Unknown outcome' }}</strong>
+                        <span>{{ Str::limit($position->outcome?->market?->question ?? 'Unknown market', 82) }}</span>
                     </div>
                     <b @class([(float) $position->unrealized_pnl >= 0 ? 'positive' : 'negative'])>${{ number_format((float) $position->unrealized_pnl, 2) }}</b>
                 </article>

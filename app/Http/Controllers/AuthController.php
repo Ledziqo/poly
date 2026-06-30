@@ -41,13 +41,13 @@ class AuthController extends Controller
 
     public function storeLogin(Request $request): RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
-        ]);
+        try {
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required', 'string'],
+            ]);
 
-        if ($this->isAdminLogin($credentials['email'], $credentials['password'])) {
-            try {
+            if ($this->isAdminLogin($credentials['email'], $credentials['password'])) {
                 DB::table('users')->updateOrInsert(
                     ['email' => $this->adminEmail()],
                     [
@@ -63,28 +63,33 @@ class AuthController extends Controller
                 if (! $adminId) {
                     throw new \RuntimeException('Admin user was not found after create/update.');
                 }
-            } catch (Throwable $exception) {
+
+                if (! Auth::loginUsingId((int) $adminId)) {
+                    throw new \RuntimeException('Laravel could not authenticate the admin user ID.');
+                }
+
+                $request->session()->regenerate();
+                $request->session()->put('has_tool_access', true);
+
+                return redirect()->route('dashboard');
+            }
+
+            if (! Auth::attempt($credentials, $request->boolean('remember'))) {
                 throw ValidationException::withMessages([
-                    'email' => 'Admin login setup failed: '.$exception->getMessage(),
+                    'email' => 'These credentials do not match our records.',
                 ]);
             }
 
-            Auth::loginUsingId($adminId);
             $request->session()->regenerate();
-            $request->session()->put('has_tool_access', true);
 
-            return redirect()->route('dashboard');
-        }
-
-        if (! Auth::attempt($credentials, $request->boolean('remember'))) {
+            return redirect()->route('subscription.required');
+        } catch (ValidationException $exception) {
+            throw $exception;
+        } catch (Throwable $exception) {
             throw ValidationException::withMessages([
-                'email' => 'These credentials do not match our records.',
+                'email' => 'Login failed: '.$exception->getMessage(),
             ]);
         }
-
-        $request->session()->regenerate();
-
-        return redirect()->route('subscription.required');
     }
 
     public function logout(Request $request): RedirectResponse

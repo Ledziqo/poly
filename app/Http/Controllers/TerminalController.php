@@ -7,11 +7,13 @@ use App\Models\BotDecisionLog;
 use App\Models\Market;
 use App\Models\MarketOutcome;
 use App\Models\Portfolio;
+use App\Models\Position;
 use App\Models\Trade;
 use App\Services\Trading\PortfolioService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Throwable;
 
 class TerminalController extends Controller
 {
@@ -19,17 +21,44 @@ class TerminalController extends Controller
     {
     }
 
-    public function dashboard(): View
+    public function dashboard(): View|\Illuminate\Http\Response
     {
-        $portfolio = $this->portfolios->refresh($this->portfolios->defaultPortfolio());
+        try {
+            $portfolio = $this->portfolios->refresh($this->portfolios->defaultPortfolio());
 
-        return view('dashboard', [
-            'portfolio' => $portfolio->load('settings'),
-            'opportunities' => $this->opportunityQuery()->limit(8)->get(),
-            'positions' => $portfolio->positions()->where('status', 'open')->with('outcome.market')->latest()->limit(8)->get(),
-            'decisions' => BotDecisionLog::with('outcome.market')->latest('decided_at')->limit(10)->get(),
-            'markets' => Market::with('outcomes')->where('active', true)->where('closed', false)->orderByDesc('volume')->limit(8)->get(),
-        ]);
+            return view('dashboard', [
+                'portfolio' => $portfolio->load('settings'),
+                'opportunities' => $this->opportunityQuery()->limit(8)->get(),
+                'positions' => $portfolio->positions()->where('status', 'open')->with('outcome.market')->latest()->limit(8)->get(),
+                'decisions' => BotDecisionLog::with('outcome.market')->latest('decided_at')->limit(10)->get(),
+                'markets' => Market::with('outcomes')->where('active', true)->where('closed', false)->orderByDesc('volume')->limit(8)->get(),
+            ]);
+        } catch (Throwable $exception) {
+            return response("Dashboard failed:\n".$exception::class."\n".$exception->getMessage(), 500)
+                ->header('Content-Type', 'text/plain');
+        }
+    }
+
+    public function health(): \Illuminate\Http\Response
+    {
+        $checks = [];
+
+        foreach ([
+            'portfolio' => fn () => $this->portfolios->defaultPortfolio()->id,
+            'portfolio refresh' => fn () => $this->portfolios->refresh($this->portfolios->defaultPortfolio())->id,
+            'opportunities' => fn () => $this->opportunityQuery()->limit(1)->count(),
+            'positions' => fn () => Position::query()->where('status', 'open')->limit(1)->count(),
+            'decisions' => fn () => BotDecisionLog::query()->latest('decided_at')->limit(1)->count(),
+            'markets' => fn () => Market::query()->where('active', true)->where('closed', false)->limit(1)->count(),
+        ] as $label => $callback) {
+            try {
+                $checks[] = $label.': ok ('.$callback().')';
+            } catch (Throwable $exception) {
+                $checks[] = $label.': error - '.$exception::class.' - '.$exception->getMessage();
+            }
+        }
+
+        return response(implode("\n", $checks), 200)->header('Content-Type', 'text/plain');
     }
 
     public function markets(Request $request): View
