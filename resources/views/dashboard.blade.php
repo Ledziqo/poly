@@ -5,6 +5,20 @@
 @endphp
 
 <x-layouts.app heading="Command Dashboard" eyebrow="What should the bot trade right now?">
+    @if ($markets->isEmpty() || $opportunities->isEmpty())
+        <section class="panel sync-panel">
+            <div>
+                <h2>Polymarket data needs a sync</h2>
+                <p class="empty">Run a browser-safe sync to pull markets, order books, AI scores, and one paper bot pass.</p>
+            </div>
+            <form method="post" action="{{ route('sync.data') }}">
+                @csrf
+                <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
+                <button>Sync Polymarket Data</button>
+            </form>
+        </section>
+    @endif
+
     <section class="grid stats-grid">
         <x-stat label="Paper Equity" :value="'$'.number_format($equity, 2)" />
         <x-stat label="Cash" :value="'$'.number_format((float) $portfolio->cash_balance, 2)" />
@@ -41,7 +55,7 @@
                         <td><x-grade :grade="$signal->grade" /></td>
                     </tr>
                 @empty
-                    <tr><td colspan="6" class="empty">Run market/order book sync and signal scoring to populate opportunities.</td></tr>
+                    <tr><td colspan="6" class="empty">Run Polymarket sync to populate opportunities.</td></tr>
                 @endforelse
                 </tbody>
             </table>
@@ -85,13 +99,15 @@
     <section class="panel">
         <div class="panel-head"><h2>Highest Volume Markets</h2><a href="{{ route('markets.index') }}">Markets</a></div>
         <div class="cards">
-            @foreach ($markets as $market)
+            @forelse ($markets as $market)
                 <a class="market-card" href="{{ route('markets.show', $market) }}">
                     <span>{{ $market->category_name ?? 'Market' }}</span>
                     <strong>{{ Str::limit($market->question, 96) }}</strong>
                     <small>Vol ${{ number_format((float) $market->volume, 0) }} · Liq ${{ number_format((float) $market->liquidity, 0) }}</small>
                 </a>
-            @endforeach
+            @empty
+                <p class="empty">No markets yet.</p>
+            @endforelse
         </div>
     </section>
 </x-layouts.app>

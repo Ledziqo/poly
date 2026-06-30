@@ -954,6 +954,123 @@ select,
 .brand-logo { max-width: 250px; }
 .auth-logo img { width: 340px; }
 
+.sync-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.sync-panel h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+}
+
+.sync-panel form {
+    width: min(260px, 100%);
+}
+
+.empty-action {
+    display: grid;
+    gap: 12px;
+    justify-items: start;
+}
+
+.empty-action p {
+    margin: 0;
+}
+
+.empty-action form {
+    width: min(260px, 100%);
+}
+
+.tabs-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid rgba(244,241,234,.12);
+    border-radius: 8px;
+    color: var(--muted);
+    background: rgba(255,255,255,.025);
+}
+
+.tab.active,
+.tab:hover {
+    color: var(--text);
+    background: rgba(255,255,255,.07);
+}
+
+.help-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.help-label b {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(244,241,234,.22);
+    border-radius: 999px;
+    color: #F4F1EA;
+    font-size: 12px;
+    font-style: normal;
+    cursor: help;
+}
+
+.help-label b::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 9px);
+    z-index: 20;
+    width: min(280px, 82vw);
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid rgba(244,241,234,.16);
+    border-radius: 8px;
+    background: #080808;
+    color: #E7E2D8;
+    padding: 10px 11px;
+    box-shadow: 0 18px 60px rgba(0,0,0,.45);
+    font-size: 12px;
+    line-height: 1.45;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.help-label b:hover::after,
+.help-label b:focus::after {
+    opacity: 1;
+}
+
+@media (max-width: 720px) {
+    .sync-panel {
+        display: grid;
+        align-items: start;
+    }
+
+    .sync-panel form,
+    .empty-action form {
+        width: 100%;
+    }
+
+    .tabs-panel {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Final responsive polish */
 .landing-nav-inner {
     grid-template-columns: 330px minmax(0, 1fr) auto;

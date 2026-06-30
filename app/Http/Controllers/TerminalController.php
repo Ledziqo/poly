@@ -9,6 +9,10 @@ use App\Models\MarketOutcome;
 use App\Models\Portfolio;
 use App\Models\Position;
 use App\Models\Trade;
+use App\Services\Polymarket\MarketSyncService;
+use App\Services\Polymarket\OrderBookSyncService;
+use App\Services\Signals\AiSignalService;
+use App\Services\Trading\PaperTradingBot;
 use App\Services\Trading\PortfolioService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -82,6 +86,36 @@ class TerminalController extends Controller
         ]);
     }
 
+    public function syncData(
+        Request $request,
+        MarketSyncService $markets,
+        OrderBookSyncService $orderBooks,
+        AiSignalService $signals,
+        PaperTradingBot $bot,
+    ): RedirectResponse {
+        try {
+            $marketCount = $markets->syncMarkets(100);
+            $bookCount = $orderBooks->sync(150);
+            $signalCount = $signals->scoreMarkets(300);
+            $botResult = $bot->run();
+            $this->portfolios->refresh($this->portfolios->defaultPortfolio());
+
+            $message = sprintf(
+                'Sync complete: %d markets, %d order books, %d scored outcomes. Bot entered %d, exited %d, skipped %d.',
+                $marketCount,
+                $bookCount,
+                $signalCount,
+                $botResult['entered'] ?? 0,
+                $botResult['exited'] ?? 0,
+                $botResult['skipped'] ?? 0
+            );
+        } catch (Throwable $exception) {
+            $message = 'Sync failed: '.$exception->getMessage();
+        }
+
+        return redirect($request->input('redirect_to', url()->previous()))->with('status', $message);
+    }
+
     public function market(Market $market): View
     {
         return view('markets.show', [
@@ -94,6 +128,16 @@ class TerminalController extends Controller
     {
         return view('opportunities.index', [
             'signals' => $this->opportunityQuery()->paginate(30),
+        ]);
+    }
+
+    public function easyWins(Request $request): View
+    {
+        $mode = $request->string('mode')->toString() === 'fast' ? 'fast' : 'easy';
+
+        return view('opportunities.easy-wins', [
+            'signals' => $this->easyWinsQuery($mode)->paginate(30)->withQueryString(),
+            'mode' => $mode,
         ]);
     }
 
@@ -182,5 +226,39 @@ class TerminalController extends Controller
             })
             ->orderByRaw("CASE grade WHEN 'Strong Entry' THEN 1 WHEN 'Good Entry' THEN 2 WHEN 'Watch' THEN 3 WHEN 'Too Late' THEN 4 ELSE 5 END")
             ->orderByDesc('edge');
+    }
+
+    private function easyWinsQuery(string $mode)
+    {
+        $settings = $this->portfolios->defaultPortfolio()->settings;
+
+        $query = AiSignal::query()
+            ->with('outcome.market')
+            ->join('market_outcomes', 'ai_signals.market_outcome_id', '=', 'market_outcomes.id')
+            ->join('markets', 'market_outcomes.market_id', '=', 'markets.id')
+            ->select('ai_signals.*')
+            ->where('ai_signals.confidence', '>=', 75)
+            ->where('ai_signals.fair_probability', '>=', 0.70)
+            ->where('ai_signals.edge', '>', 0)
+            ->whereIn('ai_signals.id', function ($query) {
+                $query->selectRaw('MAX(id)')->from('ai_signals')->groupBy('market_outcome_id');
+            })
+            ->where('market_outcomes.liquidity', '>=', (float) $settings->minimum_liquidity)
+            ->where('market_outcomes.spread', '<=', (float) $settings->max_spread)
+            ->where('markets.active', true)
+            ->where('markets.closed', false);
+
+        if ($mode === 'fast') {
+            $query
+                ->whereBetween('markets.end_at', [now()->addHours(2), now()->addHours(72)])
+                ->orderBy('markets.end_at');
+        }
+
+        return $query
+            ->orderByDesc('ai_signals.confidence')
+            ->orderByDesc('ai_signals.fair_probability')
+            ->orderByDesc('ai_signals.edge')
+            ->orderByDesc('market_outcomes.liquidity')
+            ->orderBy('market_outcomes.spread');
     }
 }

@@ -16,7 +16,8 @@
         <nav class="nav">
             <a href="{{ route('dashboard') }}" @class(['active' => request()->routeIs('dashboard')])>Dashboard</a>
             <a href="{{ route('markets.index') }}" @class(['active' => request()->routeIs('markets.*')])>Markets</a>
-            <a href="{{ route('opportunities.index') }}" @class(['active' => request()->routeIs('opportunities.*')])>AI Opportunities</a>
+            <a href="{{ route('opportunities.index') }}" @class(['active' => request()->routeIs('opportunities.index')])>AI Opportunities</a>
+            <a href="{{ route('opportunities.easy-wins') }}" @class(['active' => request()->routeIs('opportunities.easy-wins')])>Easy Wins</a>
             <a href="{{ route('portfolio.index') }}" @class(['active' => request()->routeIs('portfolio.*')])>Portfolio</a>
             <a href="{{ route('history.index') }}" @class(['active' => request()->routeIs('history.*')])>Trade History</a>
             <a href="{{ route('settings.index') }}" @class(['active' => request()->routeIs('settings.*')])>Settings</a>

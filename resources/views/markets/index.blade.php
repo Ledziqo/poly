@@ -31,7 +31,14 @@
                 @endif
             </a>
         @empty
-            <div class="panel empty">No markets yet. Run <code>php artisan poly:sync-markets</code>.</div>
+            <div class="panel empty empty-action">
+                <p>No markets yet. Run a browser-safe sync to pull live Polymarket markets.</p>
+                <form method="post" action="{{ route('sync.data') }}">
+                    @csrf
+                    <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
+                    <button>Sync Polymarket Data</button>
+                </form>
+            </div>
         @endforelse
     </section>
 

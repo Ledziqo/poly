@@ -21,9 +21,11 @@ Route::get('/subscription-required', [AuthController::class, 'subscriptionRequir
 
 Route::middleware('tool.access')->prefix('app')->group(function () {
     Route::get('/', [TerminalController::class, 'dashboard'])->name('dashboard');
+    Route::post('/sync-data', [TerminalController::class, 'syncData'])->name('sync.data');
     Route::get('/markets', [TerminalController::class, 'markets'])->name('markets.index');
     Route::get('/markets/{market}', [TerminalController::class, 'market'])->name('markets.show');
     Route::get('/opportunities', [TerminalController::class, 'opportunities'])->name('opportunities.index');
+    Route::get('/opportunities/easy-wins', [TerminalController::class, 'easyWins'])->name('opportunities.easy-wins');
     Route::get('/portfolio', [TerminalController::class, 'portfolio'])->name('portfolio.index');
     Route::get('/history', [TerminalController::class, 'history'])->name('history.index');
     Route::get('/settings', [TerminalController::class, 'settings'])->name('settings.index');
