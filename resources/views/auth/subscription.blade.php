@@ -9,7 +9,7 @@
 </head>
 <body class="auth-body">
 <main class="auth-shell wide">
-    <a class="auth-logo" href="{{ route('landing') }}"><img src="{{ asset('brand/polyengine-logo.png') }}" alt="PolyEngine"></a>
+    <a class="auth-logo" href="{{ route('landing') }}"><img src="{{ asset('brand/polyengine-logo-silver.png') }}" alt="PolyEngine"></a>
     <section class="auth-panel subscription-panel">
         <p class="eyebrow">Subscription Required</p>
         <h1>Please buy a subscription to access our tool.</h1>

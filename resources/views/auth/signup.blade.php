@@ -9,7 +9,7 @@
 </head>
 <body class="auth-body">
 <main class="auth-shell">
-    <a class="auth-logo" href="{{ route('landing') }}"><img src="{{ asset('brand/polyengine-logo.png') }}" alt="PolyEngine"></a>
+    <a class="auth-logo" href="{{ route('landing') }}"><img src="{{ asset('brand/polyengine-logo-silver.png') }}" alt="PolyEngine"></a>
     <form class="auth-panel" method="post" action="{{ route('signup.store') }}">
         @csrf
         <p class="eyebrow">Create Account</p>
