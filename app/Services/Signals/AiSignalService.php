@@ -30,13 +30,16 @@ class AiSignalService
     {
         $market = $outcome->market;
         $marketProbability = (float) $outcome->price;
-        $liquidityBoost = min(0.05, log10(max(10, (float) $outcome->liquidity)) / 100);
-        $volumeBoost = min(0.04, log10(max(10, (float) $market->volume)) / 120);
-        $spreadPenalty = min(0.08, (float) $outcome->spread);
+        $liquidityScore = min(1, log10(max(10, (float) $outcome->liquidity)) / 5);
+        $volumeScore = min(1, log10(max(10, (float) $market->volume)) / 6);
+        $spreadPenalty = min(1, ((float) $outcome->spread) / 0.12);
         $expiryPenalty = $market->end_at && $market->end_at->diffInHours(now(), false) > -24 ? 0.03 : 0;
-        $fairProbability = max(0.02, min(0.98, $marketProbability + $liquidityBoost + $volumeBoost - $spreadPenalty - $expiryPenalty));
+        $imbalance = $this->orderBookImbalance($outcome);
+        $maxAdjustment = min(0.08, $marketProbability * 0.25, (1 - $marketProbability) * 0.25);
+        $directionalAdjustment = $imbalance * $maxAdjustment;
+        $fairProbability = max(0.01, min(0.99, $marketProbability + $directionalAdjustment));
         $edge = $fairProbability - $marketProbability;
-        $confidence = (int) max(1, min(99, 50 + ($edge * 500) + ($liquidityBoost * 200) - ($spreadPenalty * 200)));
+        $confidence = (int) max(1, min(99, 35 + ($liquidityScore * 25) + ($volumeScore * 15) + (abs($imbalance) * 20) - ($spreadPenalty * 30) - ($expiryPenalty * 100)));
         $grade = $this->grade($edge, $confidence, (float) $outcome->liquidity, (float) $outcome->spread);
 
         return AiSignal::create([
@@ -47,14 +50,34 @@ class AiSignalService
             'confidence' => $confidence,
             'grade' => $grade,
             'features' => [
-                'liquidity_boost' => round($liquidityBoost, 4),
-                'volume_boost' => round($volumeBoost, 4),
+                'liquidity_score' => round($liquidityScore, 4),
+                'volume_score' => round($volumeScore, 4),
+                'order_book_imbalance' => round($imbalance, 4),
+                'directional_adjustment' => round($directionalAdjustment, 4),
                 'spread_penalty' => round($spreadPenalty, 4),
                 'expiry_penalty' => round($expiryPenalty, 4),
             ],
             'explanation' => $this->explanation($grade, $edge, $confidence, $outcome),
             'scored_at' => now(),
         ]);
+    }
+
+    private function orderBookImbalance(MarketOutcome $outcome): float
+    {
+        $book = $outcome->order_book ?? [];
+        $bidNotional = collect($book['bids'] ?? [])
+            ->take(10)
+            ->sum(fn ($level) => (float) ($level['price'] ?? 0) * (float) ($level['size'] ?? 0));
+        $askNotional = collect($book['asks'] ?? [])
+            ->take(10)
+            ->sum(fn ($level) => (float) ($level['price'] ?? 0) * (float) ($level['size'] ?? 0));
+        $total = $bidNotional + $askNotional;
+
+        if ($total <= 0) {
+            return 0.0;
+        }
+
+        return max(-1, min(1, ($bidNotional - $askNotional) / $total));
     }
 
     private function grade(float $edge, int $confidence, float $liquidity, float $spread): string
