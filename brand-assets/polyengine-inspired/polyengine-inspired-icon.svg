@@ -1,0 +1,26 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine inspired icon</title>
+  <defs>
+    <linearGradient id="silver" x1="252" y1="176" x2="586" y2="748" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.52" stop-color="#D7DEE8"/>
+      <stop offset="1" stop-color="#8F9AAD"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="548" y1="324" x2="810" y2="802" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4F83FF"/>
+      <stop offset="0.55" stop-color="#1D5BFF"/>
+      <stop offset="1" stop-color="#0B3FD8"/>
+    </linearGradient>
+  </defs>
+  <path d="M226 682V344C226 317.95 239.512 293.761 261.684 280.083L508.684 127.711C526.968 116.433 550.061 116.855 567.921 128.792L729.921 237.066C745.586 247.533 755 265.126 755 283.967V454.027C755 471.9 746.511 488.711 732.13 499.326L562 624.9V790C562 812.091 544.091 830 522 830H484C461.909 830 444 812.091 444 790V582C444 564.147 452.47 547.354 466.825 536.736L630 416.012V326.472L539.271 266.459L342 388.128V682C342 704.091 324.091 722 302 722H266C243.909 722 226 704.091 226 682Z" fill="url(#silver)"/>
+  <path d="M616 808V660C616 642.183 624.436 625.419 638.744 614.797L817 482.432V584L704 668V708H817V808H616Z" fill="url(#blue)"/>
+  <path d="M616 592V508C616 490.136 624.481 473.332 638.849 462.716L817 331.092V432L704 516V542H817V592H616Z" fill="url(#blue)"/>
+  <path d="M374 446V536" stroke="#1D5BFF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M350 468H398V518H350V468Z" fill="#1D5BFF"/>
+  <path d="M442 402V526" stroke="#2F68FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M418 430H466V490H418V430Z" fill="#2F68FF"/>
+  <path d="M510 350V484" stroke="#EEF3FA" stroke-width="18" stroke-linecap="round"/>
+  <path d="M486 390H534V452H486V390Z" fill="#EEF3FA"/>
+  <path d="M578 322V454" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M554 358H602V420H554V358Z" fill="#FFFFFF"/>
+</svg>

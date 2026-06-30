@@ -1,0 +1,20 @@
+<svg width="1800" height="420" viewBox="0 0 1800 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine inspired text</title>
+  <defs>
+    <linearGradient id="silver" x1="76" y1="116" x2="790" y2="304" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#B9C2D2"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="804" y1="112" x2="1660" y2="302" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4F83FF"/>
+      <stop offset="1" stop-color="#1554FF"/>
+    </linearGradient>
+  </defs>
+  <text x="74" y="254" fill="url(#silver)" font-family="Arial, Helvetica, sans-serif" font-size="142" font-weight="800" letter-spacing="34">POLY</text>
+  <text x="780" y="254" fill="url(#blue)" font-family="Arial, Helvetica, sans-serif" font-size="142" font-weight="800" letter-spacing="22">ENGINE</text>
+  <path d="M84 328H226" stroke="#1D5BFF" stroke-width="8" stroke-linecap="round"/>
+  <text x="276" y="344" fill="#B9C2D2" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="18">AI POWERED</text>
+  <circle cx="692" cy="333" r="5" fill="#B9C2D2"/>
+  <text x="742" y="344" fill="#2F68FF" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" letter-spacing="18">MARKETS DRIVEN</text>
+  <path d="M1400 328H1688" stroke="#1D5BFF" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,36 @@
+<svg width="1900" height="760" viewBox="0 0 1900 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine inspired lockup</title>
+  <defs>
+    <linearGradient id="silver" x1="688" y1="92" x2="1014" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.55" stop-color="#D7DEE8"/>
+      <stop offset="1" stop-color="#8F9AAD"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="974" y1="240" x2="1248" y2="548" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4F83FF"/>
+      <stop offset="1" stop-color="#1554FF"/>
+    </linearGradient>
+    <linearGradient id="wordSilver" x1="190" y1="536" x2="748" y2="628" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#B9C2D2"/>
+    </linearGradient>
+  </defs>
+  <path d="M632 468V262C632 240.787 643.027 221.098 661.124 210.038L828.124 108.008C845.741 97.2446 867.987 97.6457 885.204 109.037L1000.2 185.121C1013.81 194.125 1022 209.357 1022 225.68V332.742C1022 348.629 1014.46 363.571 1001.69 373.021L888 457.204V566C888 588.091 870.091 606 848 606H824C801.909 606 784 588.091 784 566V420C784 402.145 792.472 385.349 806.83 374.731L914 295.452V252.466L856.637 214.956L744 283.757V468C744 490.091 726.091 508 704 508H672C649.909 508 632 490.091 632 468Z" fill="url(#silver)"/>
+  <path d="M938 588V494C938 476.172 946.446 459.399 960.768 448.779L1092 351.431V430L1016 486V508H1092V588H938Z" fill="url(#blue)"/>
+  <path d="M938 418V374C938 356.172 946.446 339.399 960.768 328.779L1092 231.431V310L1016 366V382H1092V418H938Z" fill="url(#blue)"/>
+  <path d="M754 324V386" stroke="#1D5BFF" stroke-width="12" stroke-linecap="round"/>
+  <path d="M738 340H770V374H738V340Z" fill="#1D5BFF"/>
+  <path d="M800 294V384" stroke="#2F68FF" stroke-width="12" stroke-linecap="round"/>
+  <path d="M784 316H816V360H784V316Z" fill="#2F68FF"/>
+  <path d="M846 260V366" stroke="#EEF3FA" stroke-width="12" stroke-linecap="round"/>
+  <path d="M830 292H862V340H830V292Z" fill="#EEF3FA"/>
+  <path d="M892 236V346" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+  <path d="M876 270H908V318H876V270Z" fill="#FFFFFF"/>
+  <text x="208" y="664" fill="url(#wordSilver)" font-family="Arial, Helvetica, sans-serif" font-size="106" font-weight="800" letter-spacing="28">POLY</text>
+  <text x="804" y="664" fill="url(#blue)" font-family="Arial, Helvetica, sans-serif" font-size="106" font-weight="800" letter-spacing="20">ENGINE</text>
+  <path d="M238 714H370" stroke="#1D5BFF" stroke-width="7" stroke-linecap="round"/>
+  <text x="424" y="726" fill="#B9C2D2" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="12">AI POWERED</text>
+  <circle cx="726" cy="717" r="5" fill="#B9C2D2"/>
+  <text x="772" y="726" fill="#2F68FF" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" letter-spacing="12">MARKETS DRIVEN</text>
+  <path d="M1238 714H1660" stroke="#1D5BFF" stroke-width="7" stroke-linecap="round"/>
+</svg>
