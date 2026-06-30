@@ -22,15 +22,19 @@
                 <thead><tr><th>Market</th><th>Outcome</th><th>Price</th><th>Fair</th><th>Edge</th><th>Grade</th></tr></thead>
                 <tbody>
                 @forelse ($opportunities as $signal)
+                    @php
+                        $outcome = $signal->outcome;
+                        $market = $outcome ? $outcome->market : null;
+                    @endphp
                     <tr>
                         <td>
-                            @if ($signal->outcome?->market)
-                                <a href="{{ route('markets.show', $signal->outcome->market) }}">{{ Str::limit($signal->outcome->market->question, 72) }}</a>
+                            @if ($market)
+                                <a href="{{ route('markets.show', $market) }}">{{ Str::limit($market->question, 72) }}</a>
                             @else
                                 Unknown market
                             @endif
                         </td>
-                        <td>{{ $signal->outcome?->name ?? 'Unknown outcome' }}</td>
+                        <td>{{ $outcome ? $outcome->name : 'Unknown outcome' }}</td>
                         <td>{{ number_format((float) $signal->market_probability * 100, 1) }}%</td>
                         <td>{{ number_format((float) $signal->fair_probability * 100, 1) }}%</td>
                         <td class="positive">+{{ number_format((float) $signal->edge * 100, 1) }}%</td>
@@ -48,12 +52,17 @@
         <div class="panel">
             <div class="panel-head"><h2>Open Paper Positions</h2><a href="{{ route('portfolio.index') }}">Portfolio</a></div>
             @forelse ($positions as $position)
+                @php
+                    $positionOutcome = $position->outcome;
+                    $positionMarket = $positionOutcome ? $positionOutcome->market : null;
+                    $positionPnlClass = (float) $position->unrealized_pnl >= 0 ? 'positive' : 'negative';
+                @endphp
                 <article class="row-card">
                     <div>
-                        <strong>{{ $position->outcome?->name ?? 'Unknown outcome' }}</strong>
-                        <span>{{ Str::limit($position->outcome?->market?->question ?? 'Unknown market', 82) }}</span>
+                        <strong>{{ $positionOutcome ? $positionOutcome->name : 'Unknown outcome' }}</strong>
+                        <span>{{ Str::limit($positionMarket ? $positionMarket->question : 'Unknown market', 82) }}</span>
                     </div>
-                    <b @class([(float) $position->unrealized_pnl >= 0 ? 'positive' : 'negative'])>${{ number_format((float) $position->unrealized_pnl, 2) }}</b>
+                    <b class="{{ $positionPnlClass }}">${{ number_format((float) $position->unrealized_pnl, 2) }}</b>
                 </article>
             @empty
                 <p class="empty">No open positions yet. The bot will enter only when signals pass risk checks.</p>
@@ -65,7 +74,7 @@
                 <article class="decision">
                     <span>{{ strtoupper($decision->status) }} / {{ $decision->action }}</span>
                     <p>{{ $decision->reason }}</p>
-                    <small>{{ $decision->decided_at?->diffForHumans() }}</small>
+                    <small>{{ $decision->decided_at ? $decision->decided_at->diffForHumans() : '' }}</small>
                 </article>
             @empty
                 <p class="empty">No bot logs yet.</p>

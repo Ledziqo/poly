@@ -12,7 +12,7 @@ use App\Models\Trade;
 use App\Services\Trading\PortfolioService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
 use Throwable;
 
 class TerminalController extends Controller
@@ -26,13 +26,15 @@ class TerminalController extends Controller
         try {
             $portfolio = $this->portfolios->refresh($this->portfolios->defaultPortfolio());
 
-            return view('dashboard', [
+            $html = view('dashboard', [
                 'portfolio' => $portfolio->load('settings'),
                 'opportunities' => $this->opportunityQuery()->limit(8)->get(),
                 'positions' => $portfolio->positions()->where('status', 'open')->with('outcome.market')->latest()->limit(8)->get(),
                 'decisions' => BotDecisionLog::with('outcome.market')->latest('decided_at')->limit(10)->get(),
                 'markets' => Market::with('outcomes')->where('active', true)->where('closed', false)->orderByDesc('volume')->limit(8)->get(),
-            ]);
+            ])->render();
+
+            return response($html);
         } catch (Throwable $exception) {
             return response("Dashboard failed:\n".$exception::class."\n".$exception->getMessage(), 500)
                 ->header('Content-Type', 'text/plain');
