@@ -30,14 +30,24 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:190', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8'],
+            'telegram' => ['nullable', 'string', 'max:80'],
+            'whatsapp' => ['nullable', 'string', 'max:80'],
+            'trading_experience' => ['nullable', 'string', 'max:120'],
+            'message' => ['nullable', 'string', 'max:1000'],
         ]);
 
-        $user = User::create($data);
-        Auth::login($user);
-        $request->session()->regenerate();
+        $summary = "PolyEngine access request\n"
+            ."Name: {$data['name']}\n"
+            ."Email: {$data['email']}\n"
+            .'Telegram: '.($data['telegram'] ?? 'Not provided')."\n"
+            .'WhatsApp: '.($data['whatsapp'] ?? 'Not provided')."\n"
+            .'Experience: '.($data['trading_experience'] ?? 'Not provided')."\n"
+            .'Message: '.($data['message'] ?? 'Not provided');
 
-        return redirect()->route('subscription.required');
+        return redirect()
+            ->route('access.requested')
+            ->with('access_request', $data)
+            ->with('access_message', $summary);
     }
 
     public function storeLogin(Request $request): RedirectResponse
@@ -107,6 +117,16 @@ class AuthController extends Controller
     {
         return view('auth.subscription', [
             'telegram' => $this->telegram(),
+        ]);
+    }
+
+    public function accessRequested(): View
+    {
+        return view('auth.access-requested', [
+            'request' => session('access_request', []),
+            'message' => session('access_message', 'Hi, I want to request PolyEngine access.'),
+            'telegram' => $this->telegram(),
+            'whatsapp' => '@Aesliex',
         ]);
     }
 

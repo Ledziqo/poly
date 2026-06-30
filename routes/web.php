@@ -15,6 +15,7 @@ Route::get('/app-health', [TerminalController::class, 'health'])->name('app.heal
 Route::post('/login', [AuthController::class, 'storeLogin'])->name('login.store');
 Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::post('/signup', [AuthController::class, 'storeSignup'])->name('signup.store');
+Route::get('/access-requested', [AuthController::class, 'accessRequested'])->name('access.requested');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/subscription-required', [AuthController::class, 'subscriptionRequired'])->middleware('auth')->name('subscription.required');
 

@@ -20,7 +20,7 @@
         </nav>
         <div class="nav-actions">
             <a href="{{ route('login') }}">Login</a>
-            <a class="nav-cta" href="{{ route('signup') }}">Get Access</a>
+            <a class="nav-cta" href="{{ route('signup') }}">Request Access</a>
         </div>
     </div>
 </header>
@@ -134,7 +134,7 @@
             <h2>Subscription-gated while the engine is being refined.</h2>
             <p>Create an account, then message @Aesliex on Telegram to activate your PolyEngine subscription.</p>
         </div>
-        <a class="primary-btn" href="{{ route('signup') }}">Create Account</a>
+        <a class="primary-btn" href="{{ route('signup') }}">Request Access</a>
     </section>
 </main>
 </body>
