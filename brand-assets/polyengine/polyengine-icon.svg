@@ -1,0 +1,30 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine icon</title>
+  <defs>
+    <linearGradient id="core" x1="202" y1="168" x2="842" y2="856" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset="0.54" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#22C55E"/>
+    </linearGradient>
+    <filter id="soft" x="92" y="64" width="840" height="896" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18"/>
+      <feOffset dy="18"/>
+      <feComposite in2="SourceAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.023 0 0 0 0 0.038 0 0 0 0 0.071 0 0 0 0.22 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+  <g filter="url(#soft)">
+    <path d="M222 814V210C222 184.595 242.595 164 268 164H560C720.163 164 824 257.927 824 398C824 538.073 720.163 632 560 632H392V814C392 839.405 371.405 860 346 860H268C242.595 860 222 839.405 222 814Z" fill="#111827"/>
+    <path d="M392 478H552C613.118 478 654 445.668 654 398C654 350.332 613.118 318 552 318H392V478Z" fill="#0A0A0A"/>
+    <path d="M292 790V234H558C680.463 234 754 297.44 754 398C754 498.56 680.463 562 558 562H322V790H292ZM322 532H558C663.88 532 724 479.213 724 398C724 316.787 663.88 264 558 264H322V532Z" fill="url(#core)"/>
+    <path d="M392 398H642" stroke="#22C55E" stroke-width="34" stroke-linecap="round"/>
+    <path d="M392 324H580" stroke="#3B82F6" stroke-width="28" stroke-linecap="round" opacity="0.9"/>
+    <path d="M392 472H538" stroke="#F59E0B" stroke-width="28" stroke-linecap="round" opacity="0.92"/>
+    <path d="M322 638H512" stroke="#22C55E" stroke-width="30" stroke-linecap="round"/>
+    <path d="M322 710H456" stroke="#3B82F6" stroke-width="30" stroke-linecap="round"/>
+    <circle cx="642" cy="398" r="50" fill="#0A0A0A" stroke="#22C55E" stroke-width="26"/>
+  </g>
+</svg>

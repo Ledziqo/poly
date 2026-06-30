@@ -1,0 +1,32 @@
+<svg width="1900" height="560" viewBox="0 0 1900 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>PolyEngine icon and text logo</title>
+  <defs>
+    <linearGradient id="core" x1="70" y1="74" x2="486" y2="494" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset="0.54" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#22C55E"/>
+    </linearGradient>
+    <linearGradient id="word" x1="598" y1="148" x2="1766" y2="388" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.45" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#9CA3AF"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="1280" y1="126" x2="1762" y2="410" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <path d="M82 450V110C82 91.2223 97.2223 76 116 76H288C395.162 76 466 140.522 466 236C466 331.478 395.162 396 288 396H184V450C184 468.778 168.778 484 150 484H116C97.2223 484 82 468.778 82 450Z" fill="#111827"/>
+  <path d="M184 306H284C327.679 306 356 277.931 356 236C356 194.069 327.679 166 284 166H184V306Z" fill="#0A0A0A"/>
+  <path d="M122 446V114H286C370.908 114 426 161.432 426 236C426 310.568 370.908 358 286 358H156V446H122ZM156 324H286C350.596 324 392 289.375 392 236C392 182.625 350.596 148 286 148H156V324Z" fill="url(#core)"/>
+  <path d="M184 236H360" stroke="#22C55E" stroke-width="24" stroke-linecap="round"/>
+  <path d="M184 188H316" stroke="#3B82F6" stroke-width="20" stroke-linecap="round"/>
+  <path d="M184 284H286" stroke="#F59E0B" stroke-width="20" stroke-linecap="round"/>
+  <path d="M156 400H278" stroke="#22C55E" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="360" cy="236" r="34" fill="#0A0A0A" stroke="#22C55E" stroke-width="18"/>
+  <text x="560" y="332" fill="url(#word)" font-family="Inter, Arial, Helvetica, sans-serif" font-size="202" font-weight="800" letter-spacing="0">Poly</text>
+  <text x="1030" y="332" fill="url(#accent)" font-family="Inter, Arial, Helvetica, sans-serif" font-size="202" font-weight="800" letter-spacing="0">Engine</text>
+  <path d="M570 392H908" stroke="#22C55E" stroke-width="20" stroke-linecap="round"/>
+  <path d="M948 392H1320" stroke="#262626" stroke-width="20" stroke-linecap="round"/>
+  <path d="M1360 392H1788" stroke="#3B82F6" stroke-width="20" stroke-linecap="round"/>
+</svg>
