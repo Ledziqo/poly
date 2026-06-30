@@ -339,3 +339,218 @@ code { color: var(--gold); }
     .landing-band, .split-band, .pricing-band { padding-left: 10px; padding-right: 10px; }
     .pricing-band { margin-left: 10px; margin-right: 10px; padding: 22px; }
 }
+
+.landing-body {
+    background:
+        radial-gradient(circle at 50% -10%, rgba(34, 112, 255, .24), transparent 34%),
+        radial-gradient(circle at 86% 18%, rgba(34, 197, 94, .09), transparent 26%),
+        #05070B;
+}
+.landing-body::before {
+    opacity: .65;
+    background:
+        linear-gradient(90deg, rgba(148,163,184,.055) 1px, transparent 1px),
+        linear-gradient(rgba(148,163,184,.04) 1px, transparent 1px);
+    background-size: 84px 84px;
+}
+.landing-nav {
+    border-radius: 999px;
+    padding: 9px 10px 9px 18px;
+    background: rgba(8, 12, 20, .68);
+    border-color: rgba(190, 205, 230, .14);
+}
+.landing-brand img { width: 142px; }
+.hero {
+    grid-template-columns: minmax(0, .98fr) minmax(360px, .78fr);
+    gap: 58px;
+    padding: 92px 16px 70px;
+    background: transparent;
+}
+.hero-content { padding-top: 18px; }
+.hero .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 11px;
+    border: 1px solid rgba(125,178,255,.24);
+    border-radius: 999px;
+    background: rgba(23,103,255,.08);
+    color: #9EC4FF;
+}
+.hero h1 {
+    max-width: 720px;
+    font-size: clamp(50px, 6.8vw, 86px);
+    letter-spacing: 0;
+}
+.hero-copy {
+    max-width: 610px;
+    color: #C0CAD8;
+    font-size: 19px;
+}
+.hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 22px;
+}
+.hero-proof span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 0 11px;
+    border: 1px solid rgba(148,163,184,.15);
+    border-radius: 999px;
+    background: rgba(255,255,255,.035);
+    color: #AEB9CA;
+    font-size: 13px;
+}
+.hero-proof span::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22C55E;
+    box-shadow: 0 0 18px rgba(34,197,94,.8);
+}
+.product-preview {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid rgba(185,203,230,.16);
+    border-radius: 22px;
+    padding: 18px;
+    background:
+        linear-gradient(180deg, rgba(18, 25, 39, .92), rgba(7, 10, 17, .96)),
+        #080C14;
+    box-shadow: 0 38px 120px rgba(0,0,0,.45), 0 0 90px rgba(23,103,255,.12);
+}
+.product-preview::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 21px;
+    background: linear-gradient(135deg, rgba(255,255,255,.08), transparent 36%);
+    pointer-events: none;
+    z-index: -1;
+}
+.preview-top, .preview-hero-row, .preview-table div, .preview-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.preview-top { margin-bottom: 16px; }
+.preview-top span, .preview-hero-row small, .preview-table span, .preview-footer span {
+    color: #8F9DB2;
+    font-size: 12px;
+}
+.preview-top strong { display: block; margin-top: 4px; font-size: 18px; }
+.preview-top em {
+    color: #22C55E;
+    border: 1px solid rgba(34,197,94,.26);
+    background: rgba(34,197,94,.09);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+}
+.preview-hero-row { align-items: stretch; }
+.preview-hero-row div {
+    flex: 1;
+    border: 1px solid rgba(148,163,184,.13);
+    border-radius: 16px;
+    padding: 15px;
+    background: rgba(255,255,255,.035);
+}
+.preview-hero-row small, .preview-hero-row strong, .preview-hero-row span { display: block; }
+.preview-hero-row strong { margin: 9px 0 5px; font-size: 30px; line-height: 1; }
+.preview-hero-row span { color: #22C55E; font-size: 13px; }
+.preview-chart {
+    height: 168px;
+    margin: 14px 0;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    padding: 18px;
+    border: 1px solid rgba(148,163,184,.13);
+    border-radius: 16px;
+    background:
+        linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px),
+        rgba(0,0,0,.18);
+    background-size: 100% 33.3%;
+}
+.preview-chart span {
+    flex: 1;
+    min-width: 14px;
+    border-radius: 999px 999px 4px 4px;
+    background: linear-gradient(180deg, #7DB2FF, #1767FF 58%, #0D3FA7);
+    box-shadow: 0 10px 28px rgba(23,103,255,.24);
+}
+.preview-table {
+    display: grid;
+    gap: 8px;
+    border: 1px solid rgba(148,163,184,.13);
+    border-radius: 16px;
+    padding: 10px;
+    background: rgba(255,255,255,.025);
+}
+.preview-table div {
+    display: grid;
+    grid-template-columns: 1fr 70px 70px;
+    min-height: 34px;
+}
+.preview-table b { font-size: 13px; color: #E8EEF8; }
+.preview-table strong { color: #22C55E; font-size: 13px; }
+.preview-table em {
+    justify-self: end;
+    color: #D9E6FF;
+    font-style: normal;
+    font-size: 12px;
+    border: 1px solid rgba(148,163,184,.15);
+    border-radius: 999px;
+    padding: 3px 8px;
+}
+.preview-footer {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+.preview-footer span {
+    border: 1px solid rgba(148,163,184,.12);
+    border-radius: 999px;
+    padding: 7px 9px;
+    background: rgba(255,255,255,.025);
+}
+.landing-band, .split-band {
+    padding-top: 66px;
+    padding-bottom: 66px;
+}
+.feature-grid article, .steps div, .terminal-mock {
+    border-radius: 18px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+.pricing-band {
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 82% 12%, rgba(34,112,255,.22), transparent 26%),
+        linear-gradient(135deg, rgba(17,24,39,.94), rgba(5,7,11,.98));
+}
+
+@media (max-width: 980px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 62px;
+        gap: 34px;
+    }
+    .product-preview { max-width: 620px; }
+}
+
+@media (max-width: 680px) {
+    .landing-nav { border-radius: 18px; padding: 12px; }
+    .hero h1 { font-size: 43px; }
+    .hero-copy { font-size: 16px; }
+    .preview-hero-row { flex-direction: column; }
+    .preview-table div { grid-template-columns: 1fr; gap: 4px; align-items: start; }
+    .preview-table em { justify-self: start; }
+}

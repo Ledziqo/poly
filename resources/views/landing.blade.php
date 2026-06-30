@@ -24,46 +24,59 @@
 <main>
     <section class="hero">
         <div class="hero-content">
-            <p class="eyebrow">AI paper trading terminal for Polymarket</p>
-            <h1>Test market edges before you trade them.</h1>
-            <p class="hero-copy">PolyEngine mirrors live Polymarket data, scores opportunities, and runs automatic fake-money execution with order-book-aware fills, risk limits, and decision logs.</p>
+            <p class="eyebrow">Private AI paper trading lab</p>
+            <h1>Train your Polymarket edge before money is on the line.</h1>
+            <p class="hero-copy">PolyEngine scans live markets, scores asymmetric setups, and lets an automatic paper bot execute against simulated order-book depth. Real data, fake capital, cleaner decisions.</p>
             <div class="hero-actions">
                 <a class="primary-btn" href="{{ route('signup') }}">Request Access</a>
                 <a class="secondary-btn" href="{{ route('login') }}">Member Login</a>
             </div>
-            <div class="hero-stats">
-                <span><strong>Live</strong> markets</span>
-                <span><strong>Simulated</strong> fills</span>
-                <span><strong>Explainable</strong> bot actions</span>
+            <div class="hero-proof">
+                <span>Live Polymarket data</span>
+                <span>Automatic paper execution</span>
+                <span>Decision logs</span>
             </div>
         </div>
-        <aside class="hero-terminal" aria-label="PolyEngine preview">
-            <div class="terminal-top">
-                <img src="{{ asset('brand/polyengine-icon.png') }}" alt="">
+        <aside class="product-preview" aria-label="PolyEngine dashboard preview">
+            <div class="preview-top">
                 <div>
-                    <strong>PolyEngine</strong>
-                    <span>Paper bot online</span>
+                    <span>PolyEngine Terminal</span>
+                    <strong>Opportunity Console</strong>
+                </div>
+                <em>Live</em>
+            </div>
+            <div class="preview-hero-row">
+                <div>
+                    <small>Bot Equity</small>
+                    <strong>$12,842.19</strong>
+                    <span>+8.6% paper ROI</span>
+                </div>
+                <div>
+                    <small>Signal Grade</small>
+                    <strong>87</strong>
+                    <span>Strong Entry</span>
                 </div>
             </div>
-            <div class="terminal-score">
-                <span>Opportunity Score</span>
-                <strong>87</strong>
-                <em>Strong Entry</em>
+            <div class="preview-chart">
+                <span style="height:34%"></span>
+                <span style="height:48%"></span>
+                <span style="height:42%"></span>
+                <span style="height:66%"></span>
+                <span style="height:58%"></span>
+                <span style="height:78%"></span>
+                <span style="height:72%"></span>
+                <span style="height:88%"></span>
             </div>
-            <div class="terminal-market">
-                <small>Market</small>
-                <b>Will BTC close above target this week?</b>
+            <div class="preview-table">
+                <div><span>Market</span><span>Edge</span><span>Action</span></div>
+                <div><b>BTC weekly close</b><strong>+7.2%</strong><em>Enter</em></div>
+                <div><b>Fed decision</b><strong>+4.1%</strong><em>Watch</em></div>
+                <div><b>Election spread</b><strong>-1.8%</strong><em>Skip</em></div>
             </div>
-            <div class="terminal-grid">
-                <div><span>Edge</span><strong>+7.2%</strong></div>
-                <div><span>Spread</span><strong>2.8%</strong></div>
-                <div><span>Size</span><strong>$240</strong></div>
-                <div><span>Risk</span><strong>Balanced</strong></div>
-            </div>
-            <div class="terminal-log">
-                <p><span></span>Entered YES after liquidity and spread checks.</p>
-                <p><span></span>Partial fill simulated across top 3 asks.</p>
-                <p><span></span>Exit rules armed: take profit, stop loss, edge decay.</p>
+            <div class="preview-footer">
+                <span>Depth checked</span>
+                <span>Slippage modeled</span>
+                <span>Risk capped</span>
             </div>
         </aside>
     </section>
