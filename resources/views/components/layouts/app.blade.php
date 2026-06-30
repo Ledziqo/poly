@@ -40,6 +40,10 @@
                 <span></span>
                 Real data, fake money
             </div>
+            <form method="post" action="{{ route('logout') }}">
+                @csrf
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
         </header>
         @if (session('status'))
             <div class="notice">{{ session('status') }}</div>
