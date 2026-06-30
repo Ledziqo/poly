@@ -13,7 +13,7 @@ class EnsureToolAccess
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            if ($request->session()->boolean('has_tool_access') || $this->hasAdminCookie($request)) {
+            if ((bool) $request->session()->get('has_tool_access', false) || $this->hasAdminCookie($request)) {
                 return $next($request);
             }
 
