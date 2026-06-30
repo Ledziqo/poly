@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 <div class="shell">
     <aside class="sidebar">
         <a class="brand" href="{{ route('dashboard') }}">
-            <img class="brand-logo" src="{{ asset('brand/polyengine-logo-silver.png') }}" alt="PolyEngine">
+            <img class="brand-logo" src="{{ asset('brand/polyengine-logo-exact.png') }}" alt="PolyEngine">
         </a>
         <nav class="nav">
             <a href="{{ route('dashboard') }}" @class(['active' => request()->routeIs('dashboard')])>Dashboard</a>
@@ -53,3 +53,4 @@
 </div>
 </body>
 </html>
+

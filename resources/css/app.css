@@ -941,3 +941,11 @@ select,
     border-color: rgba(244,241,234,.14);
     color: #D8D2C3;
 }
+
+.landing-brand img,
+.brand-logo,
+.auth-logo img {
+    border-radius: 0;
+    filter: none;
+    object-fit: contain;
+}

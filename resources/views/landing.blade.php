@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 <header class="landing-nav">
     <div class="landing-nav-inner">
         <a class="landing-brand" href="{{ route('landing') }}">
-            <img src="{{ asset('brand/polyengine-logo-silver.png') }}" alt="PolyEngine">
+            <img src="{{ asset('brand/polyengine-logo-exact.png') }}" alt="PolyEngine">
         </a>
         <nav>
             <a href="#signals">Signals</a>
@@ -139,3 +139,4 @@
 </main>
 </body>
 </html>
+
