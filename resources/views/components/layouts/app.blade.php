@@ -3,18 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'Poly Paper Terminal' }}</title>
+    <title>{{ $title ?? 'PolyEngine' }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('brand/polyengine-icon.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 <div class="shell">
     <aside class="sidebar">
         <a class="brand" href="{{ route('dashboard') }}">
-            <span class="brand-mark">P</span>
-            <span>
-                <strong>Poly Paper</strong>
-                <small>1:1 Sim Terminal</small>
-            </span>
+            <img class="brand-logo" src="{{ asset('brand/polyengine-logo.png') }}" alt="PolyEngine">
         </a>
         <nav class="nav">
             <a href="{{ route('dashboard') }}" @class(['active' => request()->routeIs('dashboard')])>Dashboard</a>

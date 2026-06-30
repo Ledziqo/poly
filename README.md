@@ -1,4 +1,4 @@
-# Poly Paper Terminal
+# PolyEngine
 
 Hostinger-friendly Laravel MVP for automatic Polymarket paper trading.
 
