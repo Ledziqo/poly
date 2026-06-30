@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -71,7 +72,8 @@ class AuthController extends Controller
                 $request->session()->regenerate();
                 $request->session()->put('has_tool_access', true);
 
-                return redirect()->route('dashboard');
+                return redirect()->route('dashboard')
+                    ->withCookie(cookie('polyengine_admin_access', hash('sha256', $this->adminEmail().'|'.$this->adminPassword()), 60 * 24 * 30, null, null, true, true, false, 'lax'));
             }
 
             if (! Auth::attempt($credentials, $request->boolean('remember'))) {
@@ -98,7 +100,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('landing');
+        return redirect()->route('landing')->withCookie(Cookie::forget('polyengine_admin_access'));
     }
 
     public function subscriptionRequired(): View
