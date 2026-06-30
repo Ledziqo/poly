@@ -949,3 +949,7 @@ select,
     filter: none;
     object-fit: contain;
 }
+
+.landing-brand img { width: 220px; }
+.brand-logo { max-width: 250px; }
+.auth-logo img { width: 340px; }
